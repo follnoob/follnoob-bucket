@@ -1,0 +1,60 @@
+{
+    "homepage": "https://www.python.org/",
+    "license": "https://docs.python.org/3/license.html",
+    "version": "3.6.3",
+    "persist": [
+        "Lib\\site-packages",
+        "Scripts"
+    ],
+    "architecture": {
+        "64bit": {
+            "url": "https://www.python.org/ftp/python/3.6.3/python-3.6.3-amd64.exe#/py3.exe",
+            "hash": "8c83a06dce3576b65f586c2a5992febc816bed3ec5f9205e47ae0ca8581f08a7"
+        },
+        "32bit": {
+            "url": "https://www.python.org/ftp/python/3.6.3/python-3.6.3.exe#/py3.exe",
+            "hash": "cb3bfe1e6b0d1254cebf9bb1fc095fe74396af8baf65f244d5f9b349d232b280"
+        }
+    },
+    "pre_install": "copy-item $dir\\py3.exe $dir\\uninstall.exe",
+    "installer": {
+        "args": [
+            "/quiet",
+            "InstallAllUsers=$(@{$true=1;$false=0}[$global])",
+            "TargetDir=$dir",
+            "AssociateFiles=0",
+            "Shortcuts=0",
+            "InstallLauncherAllUsers=$(@{$true=1;$false=0}[$global])"
+        ]
+    },
+    "uninstaller": {
+        "file": "uninstall.exe",
+        "args": [
+            "/uninstall",
+            "/quiet",
+            "InstallAllUsers=0"
+        ]
+    },
+    "bin": [
+        "python.exe",
+        "pythonw.exe",
+        [
+            "python.exe",
+            "python3"
+        ]
+    ],
+    "env_add_path": [
+        "scripts"
+    ],
+    "checkver": "<p>Latest: <a href=\".*\">Python ([\\d.]+)</a> - <a.*>.*</a></p>",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://www.python.org/ftp/python/$version/python-$version-amd64.exe#/py3.exe"
+            },
+            "32bit": {
+                "url": "https://www.python.org/ftp/python/$version/python-$version.exe#/py3.exe"
+            }
+        }
+    }
+}
